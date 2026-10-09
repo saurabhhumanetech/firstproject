@@ -153,7 +153,7 @@ export const FooterSection: React.FC = () => {
             }}
           >
             <InstagramIcon size={18} color="#FF7AA8" />
-            <span>Saurabh's Instagram</span>
+            <span>@{siteConfig.hisHandle}</span>
             <ExternalLink size={13} color="var(--text-muted)" />
           </a>
         </div>

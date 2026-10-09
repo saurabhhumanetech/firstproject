@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
-import { Heart, Sparkles, ArrowUp, RefreshCw } from 'lucide-react';
+import { Heart, Sparkles, ArrowUp } from 'lucide-react';
 import { fireHeartConfetti } from '../utils/confetti';
 import { playCelebrationSound, playSoftAwwSound } from '../utils/sound';
 
 export const QuestionSection: React.FC = () => {
-  const [status, setStatus] = useState<'idle' | 'yes' | 'no'>('idle');
-  const [noCount, setNoCount] = useState(0);
+  const [hasSaidYes, setHasSaidYes] = useState(false);
+  const [noClicked, setNoClicked] = useState(false);
 
   const handleYes = () => {
-    setStatus('yes');
+    setHasSaidYes(true);
     playCelebrationSound();
     fireHeartConfetti();
   };
 
   const handleNo = () => {
-    setStatus('no');
-    setNoCount((prev) => prev + 1);
+    setNoClicked(true);
     playSoftAwwSound();
-  };
-
-  const handleReset = () => {
-    setStatus('idle');
   };
 
   const scrollToTop = () => {
@@ -87,58 +82,118 @@ export const QuestionSection: React.FC = () => {
               fontSize: '1.05rem',
               color: 'var(--text-muted)',
               maxWidth: '460px',
-              margin: '0 auto 28px',
+              margin: '0 auto 24px',
               lineHeight: 1.5,
             }}
           >
             no pressure, pretty girl. I just wanted to ask you in my own little way 🫶
           </p>
 
-          {/* Interaction States */}
-          {status === 'idle' && (
+          {/* If YES has NOT been clicked yet */}
+          {!hasSaidYes ? (
             <div
               style={{
                 display: 'flex',
-                flexWrap: 'wrap',
-                gap: '16px',
-                justifyContent: 'center',
+                flexDirection: 'column',
                 alignItems: 'center',
-                marginTop: '10px',
+                gap: '18px',
               }}
             >
-              {/* YES Button */}
-              <button
-                onClick={handleYes}
-                className="btn-pink"
-                style={{
-                  fontSize: '1.25rem',
-                  padding: '14px 42px',
-                  minWidth: '150px',
-                  boxShadow: '0 8px 24px rgba(255, 122, 168, 0.45)',
-                }}
-              >
-                <span>YES ♡</span>
-              </button>
+              {/* Playful alert text when NO is clicked */}
+              {noClicked && (
+                <div
+                  style={{
+                    backgroundColor: '#FFE8F2',
+                    border: '2px dashed var(--accent-rose)',
+                    borderRadius: '20px',
+                    padding: '14px 22px',
+                    maxWidth: '480px',
+                    animation: 'shakeAndPop 0.4s ease-out',
+                    boxShadow: '0 4px 14px rgba(255, 122, 168, 0.25)',
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.25rem',
+                      color: 'var(--accent-berry)',
+                      fontWeight: 800,
+                      margin: 0,
+                    }}
+                  >
+                    noo😭 u both deserve each other go select yess
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-handwriting)',
+                      fontSize: '1.2rem',
+                      color: 'var(--accent-rose-dark)',
+                      fontWeight: 600,
+                      margin: '4px 0 0 0',
+                    }}
+                  >
+                    (the NO button is disabled now, there is only one right answer 🤭✨)
+                  </p>
+                </div>
+              )}
 
-              {/* NO Button */}
-              <button
-                onClick={handleNo}
-                className="btn-soft"
+              {/* Action Buttons: YES and NO */}
+              <div
                 style={{
-                  fontSize: '1.15rem',
-                  padding: '14px 34px',
-                  minWidth: '130px',
-                  color: 'var(--text-muted)',
-                  border: '1.5px solid var(--border-pink)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '16px',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: '6px',
                 }}
               >
-                <span>NO 🥺</span>
-              </button>
+                {/* YES Button */}
+                <button
+                  onClick={handleYes}
+                  className="btn-pink"
+                  style={{
+                    fontSize: noClicked ? '1.4rem' : '1.25rem',
+                    padding: noClicked ? '16px 48px' : '14px 42px',
+                    minWidth: '160px',
+                    boxShadow: noClicked
+                      ? '0 10px 30px rgba(255, 122, 168, 0.6)'
+                      : '0 8px 24px rgba(255, 122, 168, 0.45)',
+                    transform: noClicked ? 'scale(1.08)' : 'scale(1)',
+                    transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  }}
+                >
+                  <span>YES ♡</span>
+                  {noClicked && <Sparkles size={18} className="animate-sparkle" />}
+                </button>
+
+                {/* NO Button (Disables when clicked) */}
+                <button
+                  onClick={handleNo}
+                  disabled={noClicked}
+                  className="btn-soft"
+                  style={{
+                    fontSize: '1.15rem',
+                    padding: '14px 34px',
+                    minWidth: '130px',
+                    color: noClicked ? '#BA9EA9' : 'var(--text-muted)',
+                    backgroundColor: noClicked ? '#F5EBF0' : '#FFFDF9',
+                    border: noClicked ? '1.5px dashed #D9C3CE' : '1.5px solid var(--border-pink)',
+                    opacity: noClicked ? 0.55 : 1,
+                    cursor: noClicked ? 'not-allowed' : 'pointer',
+                    textDecoration: noClicked ? 'line-through' : 'none',
+                    pointerEvents: noClicked ? 'none' : 'auto',
+                    boxShadow: noClicked ? 'none' : 'var(--shadow-sm)',
+                    transition: 'all 0.25s ease',
+                  }}
+                  title={noClicked ? 'Disabled! Go select YES ♡' : 'NO 🥺'}
+                >
+                  <span>NO 🥺</span>
+                </button>
+              </div>
             </div>
-          )}
-
-          {/* YES Outcome */}
-          {status === 'yes' && (
+          ) : (
+            /* YES Outcome */
             <div
               style={{
                 animation: 'fadePopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -221,85 +276,6 @@ export const QuestionSection: React.FC = () => {
               </div>
             </div>
           )}
-
-          {/* NO Outcome */}
-          {status === 'no' && (
-            <div
-              style={{
-                animation: 'fadeInSlow 0.4s ease-out',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '12px',
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: '#FFF0F5',
-                  color: 'var(--text-muted)',
-                  borderRadius: '50%',
-                  width: '56px',
-                  height: '56px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Heart size={30} color="#FF7AA8" />
-              </div>
-
-              <p
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: '1.2rem',
-                  color: 'var(--accent-berry)',
-                  fontWeight: 700,
-                  maxWidth: '420px',
-                  margin: 0,
-                }}
-              >
-                aww 🥺 that’s okay too. thank you for being honest with me ♡
-              </p>
-
-              <p
-                style={{
-                  fontFamily: 'var(--font-handwriting)',
-                  fontSize: '1.25rem',
-                  color: 'var(--text-muted)',
-                  margin: 0,
-                }}
-              >
-                {noCount > 1
-                  ? `(attempt #${noCount} at clicking no? Saurabh is still waiting right here patiently 🤭)`
-                  : '(no pressure ever! but if you accidentally misclicked, Saurabh is still right here 🤭)'}
-              </p>
-
-              {/* Keep option functional - let her change her choice or revisit */}
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '12px',
-                  justifyContent: 'center',
-                  marginTop: '12px',
-                }}
-              >
-                <button onClick={handleYes} className="btn-pink" style={{ fontSize: '1rem', padding: '10px 26px' }}>
-                  <span>Wait, actually YES ♡</span>
-                </button>
-
-                <button onClick={handleReset} className="btn-soft" style={{ fontSize: '0.9rem', padding: '10px 18px' }}>
-                  <RefreshCw size={14} />
-                  <span>Choose again</span>
-                </button>
-
-                <button onClick={scrollToTop} className="btn-soft" style={{ fontSize: '0.9rem', padding: '10px 18px' }}>
-                  <ArrowUp size={14} />
-                  <span>Return home</span>
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
@@ -308,9 +284,10 @@ export const QuestionSection: React.FC = () => {
           0% { opacity: 0; transform: scale(0.85); }
           100% { opacity: 1; transform: scale(1); }
         }
-        @keyframes fadeInSlow {
-          0% { opacity: 0; transform: translateY(10px); }
-          100% { opacity: 1; transform: translateY(0); }
+        @keyframes shakeAndPop {
+          0% { opacity: 0; transform: translateY(-10px) scale(0.9); }
+          50% { opacity: 1; transform: translateY(2px) scale(1.03); }
+          100% { transform: translateY(0) scale(1); }
         }
       `}</style>
     </section>

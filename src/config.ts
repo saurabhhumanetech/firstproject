@@ -31,9 +31,9 @@ export const siteConfig: SiteConfig = {
   herName: "ariessgurlll._",
   herHandle: "ariessgurlll._",
   hisName: "Saurabh",
-  hisHandle: "saurabh",
+  hisHandle: "_frame.theoryy",
   herInstagramUrl: "https://www.instagram.com/ariessgurlll._/",
-  hisInstagramUrl: "https://www.instagram.com/", // Update with Saurabh's handle or profile URL
+  hisInstagramUrl: "https://www.instagram.com/_frame.theoryy?rpxt=MXU3OWNxdzVjbXpiMw==",
 
   herSong: {
     label: "Her Song",
