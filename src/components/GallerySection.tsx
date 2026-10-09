@@ -19,7 +19,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenLightbox }
   const items: GalleryItem[] = [
     {
       id: 1,
-      image: '/assets/gallery-1.png',
+      image: '/assets/gallery-1.webp',
       caption: 'first of all… look at you 😭♡',
       supportingText: 'you have this playful little vibe that makes teasing you way too easy 🤭',
       tag: '01 · that smile',
@@ -28,7 +28,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenLightbox }
     },
     {
       id: 2,
-      image: '/assets/gallery-2.png',
+      image: '/assets/gallery-2.webp',
       caption: 'miss drama queen 🎀',
       supportingText: 'a little dramatic sometimes, but honestly, that’s part of your charm 😭😂',
       tag: '02 · food & drama',
@@ -37,7 +37,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenLightbox }
     },
     {
       id: 3,
-      image: '/assets/gallery-3.png',
+      image: '/assets/gallery-3.webp',
       caption: 'and still… ♡',
       supportingText: 'anyways, I like you just the way you are 🤍',
       tag: '03 · simply you',
@@ -186,6 +186,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenLightbox }
                           src={item.image}
                           alt={item.caption}
                           loading="lazy"
+                          decoding="async"
                           style={{
                             width: '100%',
                             height: '100%',

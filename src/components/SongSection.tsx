@@ -116,7 +116,7 @@ const SingleSongCard: React.FC<SongCardProps> = ({
           onTimeUpdate={handleTimeUpdate}
           onLoadedMetadata={handleLoadedMetadata}
           onEnded={handleEnded}
-          preload="metadata"
+          preload="none"
         />
       )}
 

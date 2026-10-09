@@ -119,7 +119,7 @@ export const MomentSection: React.FC<MomentSectionProps> = ({ onOpenLightbox }) 
           <div
             onClick={() =>
               onOpenLightbox(
-                '/assets/chat-moment.jpg',
+                '/assets/chat-moment.webp',
                 'One Little Moment ♡',
                 '“मला तू खूप आवडते 🤭”'
               )
@@ -157,9 +157,10 @@ export const MomentSection: React.FC<MomentSectionProps> = ({ onOpenLightbox }) 
               }}
             >
               <img
-                src="/assets/chat-moment.jpg"
+                src="/assets/chat-moment.webp"
                 alt="Conversation screenshot: मला तू खूप आवडते"
                 loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: 'auto',

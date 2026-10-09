@@ -16,7 +16,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLightbox }) => {
     setTimeout(() => {
       setIsRevealed(true);
       setIsBeating(false);
-    }, 450);
+    }, 200);
   };
 
   const scrollToGallery = () => {
@@ -242,7 +242,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLightbox }) => {
                 }}
                 onClick={() =>
                   onOpenLightbox?.(
-                    '/assets/heart-portrait.png',
+                    '/assets/heart-portrait.webp',
                     'ariessgurlll._ in Saurabh’s heart ♡',
                     'obviously, it’s you only, gurl 🤭😩♡'
                   )
@@ -261,8 +261,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLightbox }) => {
                 />
 
                 <img
-                  src="/assets/heart-portrait.png"
+                  src="/assets/heart-portrait.webp"
                   alt="Ariessgurlll portrait"
+                  loading="eager"
+                  decoding="async"
                   style={{
                     width: '100%',
                     height: '100%',

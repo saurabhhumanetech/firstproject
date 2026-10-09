@@ -41,7 +41,7 @@ export const siteConfig: SiteConfig = {
     artist: "Justin Bieber",
     note: "Ariessgurlll's chosen song ✨",
     spotifyUrl: "https://open.spotify.com/search/Justin%20Bieber%20Beauty%20and%20a%20Beat",
-    coverImage: "/assets/gallery-1.png",
+    coverImage: "/assets/gallery-1.webp",
     audioUrl: "/assets/her-song.mp4",
   },
 
@@ -51,7 +51,7 @@ export const siteConfig: SiteConfig = {
     artist: "Ed Sheeran",
     note: "Saurabh's song for her ♡",
     spotifyUrl: "https://open.spotify.com/search/Ed%20Sheeran%20Perfect",
-    coverImage: "/assets/heart-portrait.png",
+    coverImage: "/assets/heart-portrait.webp",
     audioUrl: "/assets/my-song.mp4",
   },
 };
