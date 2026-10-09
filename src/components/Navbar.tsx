@@ -51,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
 
   return (
     <>
-      {/* Dimmed & Blurred Backdrop Overlay Layer to prevent background text overlap */}
+      {/* Invisible click-away listener (No blur, no tint, pure invisible touch catcher) */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
@@ -59,26 +59,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
           style={{
             position: 'fixed',
             inset: 0,
-            zIndex: 48,
-            backgroundColor: 'rgba(79, 37, 56, 0.45)',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
-            animation: 'fadeInBackdrop 0.2s ease-out',
+            zIndex: 49,
+            backgroundColor: 'transparent',
           }}
         />
       )}
 
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
           scrolled
-            ? 'bg-[#FFF5F9]/95 backdrop-blur-md shadow-sm border-b border-[#F8CAD9]/60 py-2.5'
+            ? 'bg-[#FFF5F9] shadow-sm border-b border-[#F8CAD9]/70 py-2.5'
             : 'bg-transparent py-4'
         }`}
         style={{
-          backgroundColor: scrolled ? 'rgba(255, 245, 249, 0.95)' : 'rgba(255, 241, 246, 0.85)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-          borderBottom: scrolled ? '1px solid rgba(248, 202, 217, 0.6)' : '1px solid transparent',
+          backgroundColor: scrolled ? '#FFF5F9' : 'rgba(255, 241, 246, 0.95)',
+          borderBottom: scrolled ? '1px solid rgba(248, 202, 217, 0.7)' : '1px solid transparent',
         }}
       >
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -194,23 +189,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
               style={{
-                background: '#FFF0F5',
-                border: '1px solid var(--border-pink)',
+                background: isOpen ? '#FFE0ED' : '#FFF0F5',
+                border: '1.5px solid var(--border-pink)',
                 borderRadius: '12px',
                 padding: '6px 10px',
                 cursor: 'pointer',
                 color: 'var(--accent-berry)',
                 display: 'flex',
                 alignItems: 'center',
+                transition: 'all 0.15s ease',
               }}
               className="hamburger-btn"
             >
-              {isOpen ? <X size={22} /> : <Menu size={22} />}
+              {isOpen ? <X size={22} color="#FF5993" /> : <Menu size={22} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Collapsible Dropdown with Solid Background & High Z-Index Layer */}
+        {/* Solid Opaque Mobile Menu Box (Pure solid background layer, 0% blur on the page) */}
         {isOpen && (
           <div
             style={{
@@ -218,17 +214,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
               top: '100%',
               left: '12px',
               right: '12px',
-              backgroundColor: '#FFFDF9',
+              backgroundColor: '#FFFFFF',
               borderRadius: '24px',
-              boxShadow: '0 20px 45px rgba(79, 37, 56, 0.25), 0 4px 15px rgba(255, 122, 168, 0.2)',
-              border: '2px solid var(--border-pink)',
+              boxShadow: '0 20px 45px rgba(135, 61, 91, 0.35), 0 6px 15px rgba(0, 0, 0, 0.12)',
+              border: '2px solid #FF7AA8',
               padding: '18px 20px',
               display: 'flex',
               flexDirection: 'column',
               gap: '8px',
-              marginTop: '10px',
-              animation: 'fadeInMenu 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
-              zIndex: 55,
+              marginTop: '8px',
+              animation: 'fadeInMenuFast 0.15s ease-out',
+              zIndex: 9999,
             }}
           >
             <div
@@ -237,7 +233,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingBottom: '10px',
-                borderBottom: '1px dashed var(--border-pink)',
+                borderBottom: '1px dashed #F8CAD9',
                 marginBottom: '4px',
               }}
             >
@@ -245,7 +241,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
                 <Sparkles size={16} color="#FF7AA8" />
                 <span
                   style={{
-                    fontSize: '0.88rem',
+                    fontSize: '0.9rem',
                     color: 'var(--accent-berry)',
                     fontFamily: 'var(--font-heading)',
                     fontWeight: 700,
@@ -256,7 +252,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
               </div>
               <span
                 style={{
-                  fontSize: '0.78rem',
+                  fontSize: '0.8rem',
                   fontFamily: 'var(--font-handwriting)',
                   color: 'var(--accent-rose-dark)',
                   fontWeight: 700,
@@ -272,28 +268,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
                 href={link.href}
                 onClick={handleLinkClick}
                 style={{
-                  color: 'var(--text-main)',
+                  color: '#4F2538',
                   textDecoration: 'none',
                   fontFamily: 'var(--font-heading)',
                   fontWeight: 700,
                   fontSize: '1rem',
-                  padding: '11px 14px',
+                  padding: '11px 16px',
                   borderRadius: '14px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   backgroundColor: '#FFF5F9',
-                  border: '1px solid rgba(248, 202, 217, 0.5)',
-                  transition: 'all 0.2s ease',
+                  border: '1px solid #F8CAD9',
+                  transition: 'all 0.15s ease',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#FFE5F0';
-                  e.currentTarget.style.borderColor = 'var(--accent-rose)';
+                  e.currentTarget.style.borderColor = '#FF7AA8';
                   e.currentTarget.style.transform = 'translateX(4px)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = '#FFF5F9';
-                  e.currentTarget.style.borderColor = 'rgba(248, 202, 217, 0.5)';
+                  e.currentTarget.style.borderColor = '#F8CAD9';
                   e.currentTarget.style.transform = 'translateX(0)';
                 }}
               >
@@ -313,13 +309,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onSoundChange }) => {
               display: none !important;
             }
           }
-          @keyframes fadeInMenu {
-            from { opacity: 0; transform: translateY(-10px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-          }
-          @keyframes fadeInBackdrop {
-            from { opacity: 0; }
-            to { opacity: 1; }
+          @keyframes fadeInMenuFast {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
           }
         `}</style>
       </header>
