@@ -11,7 +11,7 @@ export interface SongConfig {
   note: string;
   coverImage?: string;
   spotifyUrl: string;
-  audioUrl?: string; // Optional direct audio URL for in-app preview
+  audioUrl?: string; // Audio source URL for the pure frontend audio player
 }
 
 export interface SiteConfig {
@@ -37,19 +37,21 @@ export const siteConfig: SiteConfig = {
 
   herSong: {
     label: "Her Song",
-    title: "mirrorball",
-    artist: "Taylor Swift",
-    note: "Featured on her stories ✨",
-    spotifyUrl: "https://open.spotify.com/search/Taylor%20Swift%20mirrorball",
+    title: "Beauty and a Beat",
+    artist: "Justin Bieber",
+    note: "Ariessgurlll's chosen song ✨",
+    spotifyUrl: "https://open.spotify.com/search/Justin%20Bieber%20Beauty%20and%20a%20Beat",
     coverImage: "/assets/gallery-1.png",
+    audioUrl: "/assets/her-song.mp4",
   },
 
   hisSong: {
     label: "My Song for Her",
-    title: "Lover",
-    artist: "Taylor Swift",
-    note: "Dedicated with warmth ♡",
-    spotifyUrl: "https://open.spotify.com/search/Taylor%20Swift%20Lover",
+    title: "Perfect",
+    artist: "Ed Sheeran",
+    note: "Saurabh's song for her ♡",
+    spotifyUrl: "https://open.spotify.com/search/Ed%20Sheeran%20Perfect",
     coverImage: "/assets/heart-portrait.png",
+    audioUrl: "/assets/my-song.mp4",
   },
 };
